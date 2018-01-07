@@ -24,12 +24,12 @@ In your program, all your need to do is to import the generated package, initial
 import (
   "github.com/rakyll/statik/fs"
 
-  _ "./statik" // TODO: Replace with the absolute import path
+  "./statik" // TODO: Replace with the absolute import path
 )
 
 // ...
 
-  statikFS, err := fs.New()
+  statikFS, err := fs.New(statik.Data)
   if err != nil {
     log.Fatal(err)
   }
