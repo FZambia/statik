@@ -179,16 +179,9 @@ func generateSource(srcPath string) (file *os.File, err error) {
 
 package %s
 
-import (
-	"github.com/rakyll/statik/fs"
-)
-
-func init() {
-	data := "`, namePackage)
+const Data = "`, namePackage)
 	FprintZipData(&qb, buffer.Bytes())
 	fmt.Fprint(&qb, `"
-	fs.Register(data)
-}
 `)
 
 	if err = ioutil.WriteFile(f.Name(), qb.Bytes(), 0644); err != nil {

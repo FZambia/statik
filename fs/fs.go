@@ -26,8 +26,6 @@ import (
 	"strings"
 )
 
-var zipData string
-
 // file holds unzipped read-only file contents and file metadata.
 type file struct {
 	os.FileInfo
@@ -38,17 +36,11 @@ type statikFS struct {
 	files map[string]file
 }
 
-// Register registers zip contents data, later used to initialize
-// the statik file system.
-func Register(data string) {
-	zipData = data
-}
-
 // New creates a new file system with the registered zip contents data.
 // It unzips all files and stores them in an in-memory map.
-func New() (http.FileSystem, error) {
+func New(zipData string) (http.FileSystem, error) {
 	if zipData == "" {
-		return nil, errors.New("statik/fs: no zip data registered")
+		return nil, errors.New("statik/fs: data empty")
 	}
 	zipReader, err := zip.NewReader(strings.NewReader(zipData), int64(len(zipData)))
 	if err != nil {
