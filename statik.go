@@ -179,6 +179,7 @@ func generateSource(srcPath string) (file *os.File, err error) {
 
 package %s
 
+// Data contains static content that can be embedded.
 const Data = "`, namePackage)
 	FprintZipData(&qb, buffer.Bytes())
 	fmt.Fprint(&qb, `"
