@@ -179,10 +179,22 @@ func generateSource(srcPath string) (file *os.File, err error) {
 
 package %s
 
+import (
+	"net/http"
+
+	"github.com/FZambia/statik/fs"
+)
+
+var FS http.FileSystem
+
 // Data contains static content that can be embedded.
 const Data = "`, namePackage)
 	FprintZipData(&qb, buffer.Bytes())
 	fmt.Fprint(&qb, `"
+
+func init() {
+	FS, _ = fs.New(Data)
+}
 `)
 
 	if err = ioutil.WriteFile(f.Name(), qb.Bytes(), 0644); err != nil {
