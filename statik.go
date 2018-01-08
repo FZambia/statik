@@ -191,7 +191,11 @@ func init() {
 	data := "`, namePackage)
 	FprintZipData(&qb, buffer.Bytes())
 	fmt.Fprint(&qb, `"
-	FS, _ = fs.New(Data)
+	var err error
+	FS, err = fs.New(Data)
+	if err != nil {
+		panic(err)
+	}
 }
 `)
 
