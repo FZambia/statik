@@ -192,7 +192,7 @@ func init() {
 	FprintZipData(&qb, buffer.Bytes())
 	fmt.Fprint(&qb, `"
 	var err error
-	FS, err = fs.New(Data)
+	FS, err = fs.New(data)
 	if err != nil {
 		panic(err)
 	}
